@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using PostgreSqlExample.Context;
 using PostgreSqlExample.Models;
 
-namespace PostgreSqlExample.Views
+namespace PostgreSqlExample.Controllers
 {
     public class StudentsController : Controller
     {
@@ -22,9 +22,9 @@ namespace PostgreSqlExample.Views
         // GET: Students
         public async Task<IActionResult> Index()
         {
-              return _context.Students != null ? 
-                          View(await _context.Students.ToListAsync()) :
-                          Problem("Entity set 'PostgreSqlDbContext.Students'  is null.");
+            return _context.Students != null ?
+                        View(await _context.Students.ToListAsync()) :
+                        Problem("Entity set 'PostgreSqlDbContext.Students'  is null.");
         }
 
         // GET: Students/Details/5
@@ -150,14 +150,14 @@ namespace PostgreSqlExample.Views
             {
                 _context.Students.Remove(student);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool StudentExists(int id)
         {
-          return (_context.Students?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Students?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
