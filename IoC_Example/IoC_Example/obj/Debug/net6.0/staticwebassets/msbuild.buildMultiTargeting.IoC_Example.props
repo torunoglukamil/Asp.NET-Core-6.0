@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\IoC_Example.props" />
+</Project>
