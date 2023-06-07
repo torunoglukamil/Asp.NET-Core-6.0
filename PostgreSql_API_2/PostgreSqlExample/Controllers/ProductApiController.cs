@@ -23,12 +23,8 @@ namespace PostgreSqlExample.Controllers
         {
             try
             {
-                List<ProductModel> products = _db.GetProducts();
-                if (!products.Any())
-                {
-                    return NotFound();
-                }
-                return Ok(products);
+                List<ProductModel> productList = _db.GetProducts();
+                return Ok(productList);
             }
             catch (Exception e)
             {
@@ -39,11 +35,11 @@ namespace PostgreSqlExample.Controllers
         // GET api/<ApiController>/5
         [HttpGet]
         [Route("api/[controller]/GetProductById/{id}")]
-        public IActionResult Get(int id)
+        public IActionResult Get(int productId)
         {
             try
             {
-                ProductModel? product = _db.GetProductById(id);
+                ProductModel? product = _db.GetProductById(productId);
                 if (product == null)
                 {
                     return NotFound();
@@ -63,7 +59,11 @@ namespace PostgreSqlExample.Controllers
         {
             try
             {
-                _db.CreateProduct(product);
+                bool result = _db.CreateProduct(product);
+                if (!result)
+                {
+                    NotFound();
+                }
                 return Ok();
             }
             catch (Exception e)
@@ -75,11 +75,15 @@ namespace PostgreSqlExample.Controllers
         // PUT api/<ApiController>/5
         [HttpPut]
         [Route("api/[controller]/UpdateProduct")]
-        public IActionResult Put(int id, [FromBody] ProductModel product)
+        public IActionResult Put([FromBody] ProductModel product)
         {
             try
             {
-                _db.UpdateProduct(product);
+                bool result = _db.UpdateProduct(product);
+                if (!result)
+                {
+                    NotFound();
+                }
                 return Ok();
             }
             catch (Exception e)
@@ -91,11 +95,15 @@ namespace PostgreSqlExample.Controllers
         // DELETE api/<ApiController>/5
         [HttpDelete]
         [Route("api/[controller]/DeleteProductById/{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int productId)
         {
             try
             {
-                _db.DeleteProductById(id);
+                bool result = _db.DeleteProductById(productId);
+                if (!result)
+                {
+                    NotFound();
+                }
                 return Ok();
             }
             catch (Exception e)

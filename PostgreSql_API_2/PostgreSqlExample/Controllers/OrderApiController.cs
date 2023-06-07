@@ -24,10 +24,6 @@ namespace PostgreSqlExample.Controllers
             try
             {
                 List<OrderModel> orders = _db.GetOrders();
-                if (!orders.Any())
-                {
-                    return NotFound();
-                }
                 return Ok(orders);
             }
             catch (Exception e)
@@ -39,11 +35,11 @@ namespace PostgreSqlExample.Controllers
         // GET api/<ApiController>/5
         [HttpGet]
         [Route("api/[controller]/GeOrderById/{id}")]
-        public IActionResult Get(int id)
+        public IActionResult Get(int orderId)
         {
             try
             {
-                OrderModel? order = _db.GetOrderById(id);
+                OrderModel? order = _db.GetOrderById(orderId);
                 if (order == null)
                 {
                     return NotFound();
@@ -63,7 +59,11 @@ namespace PostgreSqlExample.Controllers
         {
             try
             {
-                _db.CreateOrder(order);
+                bool result = _db.CreateOrder(order);
+                if (!result)
+                {
+                    return NotFound();
+                }
                 return Ok();
             }
             catch (Exception e)
@@ -75,11 +75,15 @@ namespace PostgreSqlExample.Controllers
         // PUT api/<ApiController>/5
         [HttpPut]
         [Route("api/[controller]/UpdateOrder")]
-        public IActionResult Put(int id, [FromBody] OrderModel order)
+        public IActionResult Put([FromBody] OrderModel order)
         {
             try
             {
-                _db.UpdateOrder(order);
+                bool result = _db.UpdateOrder(order);
+                if (!result)
+                {
+                    return NotFound();
+                }
                 return Ok();
             }
             catch (Exception e)
@@ -91,11 +95,15 @@ namespace PostgreSqlExample.Controllers
         // DELETE api/<ApiController>/5
         [HttpDelete]
         [Route("api/[controller]/DeleteOrderById/{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int orderId)
         {
             try
             {
-                _db.DeleteOrderById(id);
+                bool result = _db.DeleteOrderById(orderId);
+                if (!result)
+                {
+                    return NotFound();
+                }
                 return Ok();
             }
             catch (Exception e)

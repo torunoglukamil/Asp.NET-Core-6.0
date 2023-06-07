@@ -15,8 +15,8 @@ namespace PostgreSqlExample.Controllers
 
         public List<ProductModel> GetProducts() 
         { 
-            List<ProductModel> products = new List<ProductModel>();
-            _context.Products.ToList().ForEach(product => products.Add(new ProductModel()
+            List<ProductModel> productList = new List<ProductModel>();
+            _context.Products.ToList().ForEach(product => productList.Add(new ProductModel()
             {
                 id = product.id,
                 name = product.name,
@@ -24,15 +24,15 @@ namespace PostgreSqlExample.Controllers
                 size = product.size,
                 price = product.price,
             }));
-            return products;
+            return productList;
         }
 
-        public ProductModel? GetProductById(int id)
+        public ProductModel? GetProductById(int productId)
         {
-            ProductEntity? product = _context.Products.Where(product => product.id.Equals(id)).FirstOrDefault();
+            ProductEntity? product = _context.Products.Where(product => product.id.Equals(productId)).FirstOrDefault();
             if(product == null)
             {
-                return null!;
+                return null;
             }
             return new ProductModel()
             {
@@ -44,8 +44,13 @@ namespace PostgreSqlExample.Controllers
             };
         }
 
-        public void CreateProduct(ProductModel product)
+        public bool CreateProduct(ProductModel product)
         {
+            ProductEntity? _product = _context.Products.Where(_product => _product.id.Equals(product.id)).FirstOrDefault();
+            if (_product != null)
+            {
+                return false;
+            }
             _context.Products.Add(new ProductEntity()
             {
                 id = product.id,
@@ -55,29 +60,34 @@ namespace PostgreSqlExample.Controllers
                 price = product.price,
             });
             _context.SaveChanges();
+            return true;
         }
 
-        public void UpdateProduct(ProductModel product)
+        public bool UpdateProduct(ProductModel product)
         {
             ProductEntity? _product = _context.Products.Where(_product => _product.id.Equals(product.id)).FirstOrDefault();
-            if (_product != null)
+            if (_product == null)
             {
-                _product.name = product.name;
-                _product.brand = product.brand;
-                _product.size = product.size;
-                _product.price = product.price;
+                return false;
             }
+            _product.name = product.name;
+            _product.brand = product.brand;
+            _product.size = product.size;
+            _product.price = product.price;
             _context.SaveChanges();
+            return true;
         }
 
-        public void DeleteProductById(int id)
+        public bool DeleteProductById(int productId)
         {
-            ProductEntity? product = _context.Products.Where(product => product.id.Equals(id)).FirstOrDefault();
-            if(product != null)
+            ProductEntity? product = _context.Products.Where(product => product.id.Equals(productId)).FirstOrDefault();
+            if (product == null)
             {
-                _context.Products.Remove(product);
-                _context.SaveChanges();
+                return false;
             }
+            _context.Products.Remove(product);
+            _context.SaveChanges();
+            return true;
         }
     }
 }
