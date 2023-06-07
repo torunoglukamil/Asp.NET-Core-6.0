@@ -1,13 +1,14 @@
 ﻿using PostgreSqlExample.Context;
 using PostgreSqlExample.Entities;
+using PostgreSqlExample.Models;
 
-namespace PostgreSqlExample.Models
+namespace PostgreSqlExample.Controllers
 {
-    public class ProductDbHelper
+    public class ProductDbController
     {
         private EntityDbContext _context;
 
-        public ProductDbHelper(EntityDbContext context)
+        public ProductDbController(EntityDbContext context)
         {
             _context = context;
         }

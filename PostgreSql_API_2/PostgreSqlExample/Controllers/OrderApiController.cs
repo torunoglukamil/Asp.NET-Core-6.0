@@ -9,11 +9,11 @@ namespace PostgreSqlExample.Controllers
     [ApiController]
     public class OrderApiController : ControllerBase
     {
-        private readonly OrderDbHelper _db;
+        private readonly OrderDbController _db;
 
         public OrderApiController(EntityDbContext context)
         {
-            _db = new OrderDbHelper(context);
+            _db = new OrderDbController(context);
         }
 
         // GET: api/<ApiController>
