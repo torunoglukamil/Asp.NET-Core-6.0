@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\_FILES\\GitHub\\Asp.NET-Core-6.0\\PostgreSql_API\\PostgreSqlExample\\PostgreSqlExample.csproj": {}
+    "C:\\_FILES\\GitHub\\Asp.NET-Core-6.0\\PostgreSql_API_2\\PostgreSqlExample\\PostgreSqlExample.csproj": {}
   },
   "projects": {
-    "C:\\_FILES\\GitHub\\Asp.NET-Core-6.0\\PostgreSql_API\\PostgreSqlExample\\PostgreSqlExample.csproj": {
+    "C:\\_FILES\\GitHub\\Asp.NET-Core-6.0\\PostgreSql_API_2\\PostgreSqlExample\\PostgreSqlExample.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\_FILES\\GitHub\\Asp.NET-Core-6.0\\PostgreSql_API\\PostgreSqlExample\\PostgreSqlExample.csproj",
+        "projectUniqueName": "C:\\_FILES\\GitHub\\Asp.NET-Core-6.0\\PostgreSql_API_2\\PostgreSqlExample\\PostgreSqlExample.csproj",
         "projectName": "PostgreSqlExample",
-        "projectPath": "C:\\_FILES\\GitHub\\Asp.NET-Core-6.0\\PostgreSql_API\\PostgreSqlExample\\PostgreSqlExample.csproj",
+        "projectPath": "C:\\_FILES\\GitHub\\Asp.NET-Core-6.0\\PostgreSql_API_2\\PostgreSqlExample\\PostgreSqlExample.csproj",
         "packagesPath": "C:\\Users\\pulsa\\.nuget\\packages\\",
-        "outputPath": "C:\\_FILES\\GitHub\\Asp.NET-Core-6.0\\PostgreSql_API\\PostgreSqlExample\\obj\\",
+        "outputPath": "C:\\_FILES\\GitHub\\Asp.NET-Core-6.0\\PostgreSql_API_2\\PostgreSqlExample\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\pulsa\\AppData\\Roaming\\NuGet\\NuGet.Config",
