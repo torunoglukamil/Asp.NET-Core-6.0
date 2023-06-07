@@ -39,11 +39,7 @@ namespace PostgreSqlExample.Controllers
         {
             try
             {
-                OrderModel? order = _db.GetOrderById(id);
-                if (order == null)
-                {
-                    return NotFound();
-                }
+                OrderModel order = _db.GetOrderById(id);
                 return Ok(order);
             }
             catch (Exception e)
@@ -59,11 +55,7 @@ namespace PostgreSqlExample.Controllers
         {
             try
             {
-                bool result = _db.CreateOrder(order);
-                if (!result)
-                {
-                    return NotFound();
-                }
+                _db.CreateOrder(order);
                 return Ok();
             }
             catch (Exception e)
@@ -79,11 +71,7 @@ namespace PostgreSqlExample.Controllers
         {
             try
             {
-                bool result = _db.UpdateOrder(order);
-                if (!result)
-                {
-                    return NotFound();
-                }
+                _db.UpdateOrder(order);
                 return Ok();
             }
             catch (Exception e)
@@ -99,11 +87,7 @@ namespace PostgreSqlExample.Controllers
         {
             try
             {
-                bool result = _db.DeleteOrderById(id);
-                if (!result)
-                {
-                    return NotFound();
-                }
+                _db.DeleteOrderById(id);
                 return Ok();
             }
             catch (Exception e)

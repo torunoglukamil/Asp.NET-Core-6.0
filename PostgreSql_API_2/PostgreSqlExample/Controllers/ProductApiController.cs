@@ -39,11 +39,7 @@ namespace PostgreSqlExample.Controllers
         {
             try
             {
-                ProductModel? product = _db.GetProductById(id);
-                if (product == null)
-                {
-                    return NotFound();
-                }
+                ProductModel product = _db.GetProductById(id);
                 return Ok(product);
             }
             catch (Exception e)
@@ -59,11 +55,7 @@ namespace PostgreSqlExample.Controllers
         {
             try
             {
-                bool result = _db.CreateProduct(product);
-                if (!result)
-                {
-                    return NotFound();
-                }
+                _db.CreateProduct(product);
                 return Ok();
             }
             catch (Exception e)
@@ -79,11 +71,7 @@ namespace PostgreSqlExample.Controllers
         {
             try
             {
-                bool result = _db.UpdateProduct(product);
-                if (!result)
-                {
-                    return NotFound();
-                }
+                _db.UpdateProduct(product);
                 return Ok();
             }
             catch (Exception e)
@@ -99,11 +87,7 @@ namespace PostgreSqlExample.Controllers
         {
             try
             {
-                bool result = _db.DeleteProductById(id);
-                if (!result)
-                {
-                    return NotFound();
-                }
+                _db.DeleteProductById(id);
                 return Ok();
             }
             catch (Exception e)

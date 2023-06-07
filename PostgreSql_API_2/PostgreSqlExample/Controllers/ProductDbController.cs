@@ -27,13 +27,9 @@ namespace PostgreSqlExample.Controllers
             return productList;
         }
 
-        public ProductModel? GetProductById(int productId)
+        public ProductModel GetProductById(int productId)
         {
-            ProductEntity? product = _context.Products.Where(product => product.id.Equals(productId)).FirstOrDefault();
-            if(product == null)
-            {
-                return null;
-            }
+            ProductEntity product = _context.Products.Where(product => product.id.Equals(productId)).FirstOrDefault()!;
             return new ProductModel()
             {
                 id = product.id,
@@ -44,13 +40,9 @@ namespace PostgreSqlExample.Controllers
             };
         }
 
-        public bool CreateProduct(ProductModel product)
+        public void CreateProduct(ProductModel product)
         {
-            ProductEntity? _product = _context.Products.Where(_product => _product.id.Equals(product.id)).FirstOrDefault();
-            if (_product != null)
-            {
-                return false;
-            }
+            ProductEntity _product = _context.Products.Where(_product => _product.id.Equals(product.id)).FirstOrDefault()!;
             _context.Products.Add(new ProductEntity()
             {
                 id = product.id,
@@ -60,34 +52,23 @@ namespace PostgreSqlExample.Controllers
                 price = product.price,
             });
             _context.SaveChanges();
-            return true;
         }
 
-        public bool UpdateProduct(ProductModel product)
+        public void UpdateProduct(ProductModel product)
         {
-            ProductEntity? _product = _context.Products.Where(_product => _product.id.Equals(product.id)).FirstOrDefault();
-            if (_product == null)
-            {
-                return false;
-            }
+            ProductEntity _product = _context.Products.Where(_product => _product.id.Equals(product.id)).FirstOrDefault()!;
             _product.name = product.name;
             _product.brand = product.brand;
             _product.size = product.size;
             _product.price = product.price;
             _context.SaveChanges();
-            return true;
         }
 
-        public bool DeleteProductById(int productId)
+        public void DeleteProductById(int productId)
         {
-            ProductEntity? product = _context.Products.Where(product => product.id.Equals(productId)).FirstOrDefault();
-            if (product == null)
-            {
-                return false;
-            }
+            ProductEntity product = _context.Products.Where(product => product.id.Equals(productId)).FirstOrDefault()!;
             _context.Products.Remove(product);
             _context.SaveChanges();
-            return true;
         }
     }
 }

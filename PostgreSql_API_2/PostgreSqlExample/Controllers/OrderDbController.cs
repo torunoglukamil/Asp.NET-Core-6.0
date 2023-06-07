@@ -28,13 +28,9 @@ namespace PostgreSqlExample.Controllers
             return orderList;
         }
 
-        public OrderModel? GetOrderById(int orderId)
+        public OrderModel GetOrderById(int orderId)
         {
-            OrderEntity? order = _context.Orders.Where(order => order.id.Equals(orderId)).FirstOrDefault();
-            if (order == null)
-            {
-                return null;
-            }
+            OrderEntity order = _context.Orders.Where(order => order.id.Equals(orderId)).FirstOrDefault()!;
             return new OrderModel()
             {
                 id = order.id,
@@ -45,14 +41,9 @@ namespace PostgreSqlExample.Controllers
             };
         }
 
-        public bool CreateOrder(OrderModel order)
+        public void CreateOrder(OrderModel order)
         {
-            OrderEntity? _order = _context.Orders.Where(_order => _order.id.Equals(order.id)).FirstOrDefault();
-            ProductEntity? product = _context.Products.Where(product => product.id.Equals(order.product_id)).FirstOrDefault();
-            if (product == null || _order != null)
-            {
-                return false;
-            }
+            ProductEntity product = _context.Products.Where(product => product.id.Equals(order.product_id)).FirstOrDefault()!;
             _context.Orders.Add(new OrderEntity()
             {
                 id = order.id,
@@ -62,32 +53,21 @@ namespace PostgreSqlExample.Controllers
                 phone = order.phone,
             });
             _context.SaveChanges();
-            return true;
         }
 
-        public bool UpdateOrder(OrderModel order)
+        public void UpdateOrder(OrderModel order)
         {
-            OrderEntity? _order = _context.Orders.Where(_order => _order.id.Equals(order.id)).FirstOrDefault();
-            if (_order == null)
-            {
-                return false;
-            }
+            OrderEntity _order = _context.Orders.Where(_order => _order.id.Equals(order.id)).FirstOrDefault()!;
             _order.address = order.address;
             _order.phone = order.phone;
             _context.SaveChanges();
-            return true;
         }
 
-        public bool DeleteOrderById(int orderId)
+        public void DeleteOrderById(int orderId)
         {
-            OrderEntity? order = _context.Orders.Where(order => order.id.Equals(orderId)).FirstOrDefault();
-            if (order == null)
-            {
-                return false;
-            }
+            OrderEntity order = _context.Orders.Where(order => order.id.Equals(orderId)).FirstOrDefault()!;
             _context.Orders.Remove(order);
             _context.SaveChanges();
-            return true;
         }
     }
 }
