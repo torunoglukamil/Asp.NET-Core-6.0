@@ -62,7 +62,7 @@ namespace PostgreSqlExample.Controllers
                 bool result = _db.CreateProduct(product);
                 if (!result)
                 {
-                    NotFound();
+                    return NotFound();
                 }
                 return Ok();
             }
@@ -82,7 +82,7 @@ namespace PostgreSqlExample.Controllers
                 bool result = _db.UpdateProduct(product);
                 if (!result)
                 {
-                    NotFound();
+                    return NotFound();
                 }
                 return Ok();
             }
@@ -102,7 +102,7 @@ namespace PostgreSqlExample.Controllers
                 bool result = _db.DeleteProductById(id);
                 if (!result)
                 {
-                    NotFound();
+                    return NotFound();
                 }
                 return Ok();
             }
