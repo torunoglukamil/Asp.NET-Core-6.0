@@ -35,11 +35,11 @@ namespace PostgreSqlExample.Controllers
         // GET api/<ApiController>/5
         [HttpGet]
         [Route("api/[controller]/GetProductById/{id}")]
-        public IActionResult Get(int productId)
+        public IActionResult Get(int id)
         {
             try
             {
-                ProductModel? product = _db.GetProductById(productId);
+                ProductModel? product = _db.GetProductById(id);
                 if (product == null)
                 {
                     return NotFound();
@@ -95,11 +95,11 @@ namespace PostgreSqlExample.Controllers
         // DELETE api/<ApiController>/5
         [HttpDelete]
         [Route("api/[controller]/DeleteProductById/{id}")]
-        public IActionResult Delete(int productId)
+        public IActionResult Delete(int id)
         {
             try
             {
-                bool result = _db.DeleteProductById(productId);
+                bool result = _db.DeleteProductById(id);
                 if (!result)
                 {
                     NotFound();
