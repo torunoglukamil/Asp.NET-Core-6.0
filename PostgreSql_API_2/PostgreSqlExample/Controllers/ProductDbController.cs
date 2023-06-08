@@ -42,7 +42,6 @@ namespace PostgreSqlExample.Controllers
 
         public void CreateProduct(ProductModel product)
         {
-            ProductEntity _product = _context.Products.Where(_product => _product.id.Equals(product.id)).FirstOrDefault()!;
             _context.Products.Add(new ProductEntity()
             {
                 id = product.id,
