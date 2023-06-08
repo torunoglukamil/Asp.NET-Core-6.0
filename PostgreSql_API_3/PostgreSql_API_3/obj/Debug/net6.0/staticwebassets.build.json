@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "MgDw63uCnKrdInzXOB3tnwNVOYk9Q2+Hj/xaV2vyuoY=",
+  "Source": "PostgreSql_API_3",
+  "BasePath": "_content/PostgreSql_API_3",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

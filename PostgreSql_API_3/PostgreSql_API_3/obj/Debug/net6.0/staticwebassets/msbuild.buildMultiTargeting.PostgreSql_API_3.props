@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\PostgreSql_API_3.props" />
+</Project>
