@@ -35,7 +35,31 @@ namespace PostgreSql_API_4.Helpers
                     Data = e.Message,
                 };
             }
+        }
 
+        public ResponseModel CommandQuery(string query)
+        {
+            try
+            {
+                _connection.Open();
+                NpgsqlCommand command = new NpgsqlCommand(query, _connection);
+                command.ExecuteNonQuery();
+                _connection.Close();
+                return new ResponseModel()
+                {
+                    Type = ResponseType.Success,
+                    Data = "Success",
+                };
+            }
+            catch (Exception e)
+            {
+                _connection.Close();
+                return new ResponseModel()
+                {
+                    Type = ResponseType.Failure,
+                    Data = e.Message,
+                };
+            }
         }
     }
 }

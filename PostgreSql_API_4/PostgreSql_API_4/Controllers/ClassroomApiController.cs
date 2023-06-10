@@ -14,16 +14,37 @@ namespace PostgreSqlExample.Controllers
             _db = new ClassroomDbController(db);
         }
 
+        private ObjectResult SendResponse(ResponseModel response)
+        {
+            switch (response.Type)
+            {
+                case ResponseType.Success:
+                    return Ok(response.Data);
+                case ResponseType.NotFound:
+                    return NotFound(response.Data);
+                default:
+                    return BadRequest(response.Data);
+            }
+        }
+
         [HttpGet]
         [Route("api/[controller]/GetClassrooms")]
-        public IActionResult Get()
-        {
-            ResponseModel response = _db.GetClassrooms();
-            if(response.Type == ResponseType.Success)
-            {
-                return Ok(response.Data);
-            }
-            return BadRequest(response.Data);
-        }
+        public IActionResult Get() => SendResponse(_db.GetClassrooms());
+
+        [HttpGet]
+        [Route("api/[controller]/GetClassroomById/{id}")]
+        public IActionResult Get(int id) => SendResponse(_db.GetClassroomById(id));
+
+        [HttpPost]
+        [Route("api/[controller]/CreateClassroom")]
+        public IActionResult Post([FromBody] ClassroomModel classroom) => SendResponse(_db.CreateClassroom(classroom));
+
+        [HttpPut]
+        [Route("api/[controller]/UpdateClassroom")]
+        public IActionResult Put([FromBody] ClassroomModel classroom) => SendResponse(_db.UpdateClassroom(classroom));
+
+        [HttpDelete]
+        [Route("api/[controller]/DeleteClassroomById/{id}")]
+        public IActionResult Delete(int id) => SendResponse(_db.DeleteClassroomById(id));
     }
 }
